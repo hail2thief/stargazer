@@ -11,7 +11,7 @@ function(libname, pkgname) {
            p.auto, ci, ci.custom, ci.level, ci.separator, add.lines, apply.coef, apply.se, apply.t, apply.p, apply.ci,
            colnames,
            column.sep.width, decimal.mark, df, digit.separate, digit.separator, digits, digits.extra, 
-           flip, float, 
+           flip, float,
            float.env, font.size, header, initial.zero, intercept.bottom, intercept.top, keep, keep.stat, 
            label, model.names, model.numbers, multicolumn, no.space, notes, notes.align, notes.append, 
            notes.label, object.names, omit, omit.labels, omit.stat, omit.summary.stat, omit.table.layout,
@@ -3218,6 +3218,9 @@ function(libname, pkgname) {
   		}
   	}
 
+  	# begin adjustbox
+    cat("\\end{adjustbox} \n", sep = "")
+
   	cat("\\end{tabular} \n")
   	if (.format.floating == TRUE) { cat("\\end{", .format.floating.environment,"} \n", sep="") }
   	else if (!is.null(.format.font.size)) {
@@ -3940,6 +3943,8 @@ function(libname, pkgname) {
         }
       }
       #
+      # begin adjustbox
+      cat("\\begin{adjustbox}{max width=\\textwidth}\n", sep = "")
       
       cat("\\begin{tabular}{",.formatting.alignment,"} \n",sep="")
     }
@@ -3983,6 +3988,10 @@ function(libname, pkgname) {
           if ((.format.s.stat.parts[i]=="-") | (.format.s.stat.parts[i]=="-!") | (.format.s.stat.parts[i]=="=") | (.format.s.stat.parts[i]=="=!")) { .publish.horizontal.line <<- FALSE }
         }
       }
+      
+      
+      # begin adjustbox
+      cat("\\end{adjustbox} \n", sep = "")
       
       cat("\\end{tabular} \n")
       if (.format.floating == TRUE) { cat("\\end{", .format.floating.environment,"} \n", sep="") }
@@ -4220,7 +4229,10 @@ function(libname, pkgname) {
     		.summ.stat.table.part(object,.format.s.stat.parts[i])
     	}
       
-      cat("\\end{tabular} \n")
+  	  # begin adjustbox
+  	    cat("\\end{adjustbox} \n", sep = "")
+  	  
+      
       if (.format.floating == TRUE) { cat("\\end{", .format.floating.environment,"} \n", sep="") }
       else if (!is.null(.format.font.size)) {
         cat("\\endgroup \n",sep="")
@@ -4316,7 +4328,11 @@ function(libname, pkgname) {
         }
       }
       #
-  
+    
+    # add adjustbox environment
+    cat("\\begin{adjustbox}{max width=\\textwidth}\n", sep = "")
+    
+    
     cat("\\begin{tabular}{",.formatting.alignment,"} \n",sep="")
   }
   
@@ -4652,8 +4668,10 @@ function(libname, pkgname) {
   	    .formatting.alignment <- paste(.formatting.alignment, "D{", .format.decimal.character,"}{", .format.decimal.character,"}{-", .format.round.digits,"} ", sep="")
         }
       }
-      #
-
+      # begin adjustbox
+      cat("\\begin{adjustbox}{max width=\\textwidth}\n", sep = "")
+      
+     
       cat("\\begin{tabular}{",.formatting.alignment,"} \n",sep="")
   }
 
